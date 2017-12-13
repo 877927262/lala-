@@ -33,43 +33,38 @@ router.get('/getCurrentIllnessDoctorList', function(req, res, next) {
     });
 });
 
+
 router.get('/getCurrentDoctorWorkList', function(req, res, next) {
     let theDoctor=[];
+    let doctorId=req.query.doctorId;
+    let dateList=['2017-12-22','2017-12-23','2017-12-24','2017-12-25','2017-12-26','2017-12-27','2017-12-28'];
 
-        let doctorId=req.query.doctorId;
-        let dateList=['2017-12-22','2017-12-23','2017-12-24','2017-12-25','2017-12-26','2017-12-27','2017-12-28'];
+    for(let index in dateList){
+        let work={};
+        work.date=dateList[index];
+        examDB.getCurrentDoctorAmWorkList(doctorId,dateList[index]).then((result)=>{
+            //这里规定每个大夫每个时间段最多只能诊断20个病人
+            console.log(result);
+            work.am=20-result.length;
 
-        for(let index in dateList){
-            let work={};
-            work.date=dateList[index];
-
-            examDB.getCurrentDoctorAmWorkList(doctorId,dateList[index]).then((result)=>{
+            examDB.getCurrentDoctorPmWorkList(doctorId,dateList[index]).then((result)=>{
                 //这里规定每个大夫每个时间段最多只能诊断20个病人
-                work.am=20-result.length;
+                work.pm=20-result.length;
 
-                examDB.getCurrentDoctorPmWorkList(doctorId,dateList[index]).then((result)=>{
-                    //这里规定每个大夫每个时间段最多只能诊断20个病人
-                    work.pm=20-result.length;
+                theDoctor.push(work);
 
-                    theDoctor.push(work);
-
-                    if(index==dateList.length-1){
-                        res.send(theDoctor);
-                    }
-
-                }).catch((err)=>{
-                    console.log("笨蛋，错啦！！！")
-                });
+                if(index==dateList.length-1){
+                    res.send(theDoctor);
+                }
 
             }).catch((err)=>{
                 console.log("笨蛋，错啦！！！")
             });
 
-
-
-
-
-        }
+        }).catch((err)=>{
+            console.log("笨蛋，错啦！！！")
+        });
+    }
 
 
 

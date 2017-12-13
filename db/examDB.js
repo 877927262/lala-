@@ -23,7 +23,7 @@ function getCurrentIllnessDoctorList(illnessId){
 //获取当前日期 当前大夫上午的患者列表
 function getCurrentDoctorAmWorkList(doctorId,date){
 
-    let sql='select * from appointment where doctor='+doctorId+' and time="上午" and date='+date;
+    let sql='select * from appointment where doctor='+doctorId+' and time="上午" and date="'+date+'"';
     return changeDB(sql);
 }
 //获取当前日期 当前大夫下午的患者列表
