@@ -42,21 +42,32 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
         let work={};
         work.date=item;
 
-        examDB.getCurrentDoctorAmWorkList(doctorId,item).then((result)=>{
+
+
+
+
+
+
+        let p1=examDB.getCurrentDoctorAmWorkList(doctorId,item).then((result)=>{
             //这里规定每个大夫每个时间段最多只能诊断20个病人
             work.am=20-result.length;
         }).catch((err)=>{
             console.log("笨蛋，错啦！！！")
         });
 
-        examDB.getCurrentDoctorPmWorkList(doctorId,item).then((result)=>{
+        let p2=examDB.getCurrentDoctorPmWorkList(doctorId,item).then((result)=>{
             //这里规定每个大夫每个时间段最多只能诊断20个病人
             work.pm=20-result.length;
         }).catch((err)=>{
             console.log("笨蛋，错啦！！！")
         });
 
-        theDoctor.push(work);
+
+        Promise.all([p1,p2]).then(function () {
+
+            theDoctor.push(work);
+        })
+
     }
     res.send(JSON.stringify(theDoctor));
 
