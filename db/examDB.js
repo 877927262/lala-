@@ -17,7 +17,7 @@ function getCurrentDepartmentDoctorList(departmentId){
 }
 //获取当前病症的所有大夫
 function getCurrentIllnessDoctorList(illnessId){
-    let sql = "select * from doctor_illness where illness="+illnessId;
+    let sql = "select a.doctor,b.name from doctor_illness as a inner join doctor as b on a.doctor=b.id where illness="+illnessId;
     return changeDB(sql);
 }
 //获取当前日期 当前大夫上午的患者列表
