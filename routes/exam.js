@@ -44,7 +44,6 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
         work.date=dateList[index];
         examDB.getCurrentDoctorAmWorkList(doctorId,dateList[index]).then((result)=>{
             //这里规定每个大夫每个时间段最多只能诊断20个病人
-            console.log(result);
             work.am=20-result.length;
 
             examDB.getCurrentDoctorPmWorkList(doctorId,dateList[index]).then((result)=>{
@@ -66,51 +65,13 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
         });
     }
 
-
-
-
-
-
-
-
 });
 
-router.get('/showAnswer', function(req, res, next) {
-    var subjectid=req.query.subjectid;
-    examDB.showAnswer(subjectid).then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
-    });
 
-});
 
-router.get('/checked', function(req, res, next) {
-    var id=req.query.id;
-    examDB.checked(id).then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
-    });
-});
-router.get('/unchecked', function(req, res, next) {
-    var id=req.query.id;
 
-    examDB.unchecked(id).then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
-    });
-});
-router.get('/delSubject', function(req, res, next) {
-    var id=req.query.id;
 
-    examDB.delSubject(id).then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
-    });
-});
+
 router.post('/saveSubject', function(req, res, next) {
     var subjectTypeId=req.body.subjectTypeId;
     var subjectLevelId=req.body.subjectLevelId;
