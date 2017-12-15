@@ -32,60 +32,21 @@ function getCurrentDoctorPmWorkList(doctorId,date){
     let sql='select * from appointment where doctor='+doctorId+' and time="下午" and date='+date;
     return changeDB(sql);
 }
-//获取当前大夫当天的工作列表（上午和下午）
-// function getCurrentDoctorWorkList(doctorId,date){
-//
-//     let sql='select * from appointment where doctor='+doctorId+' and time="下午" and date='+date;
-//     return changeDB(sql);
-// }
-
-
-
-
-
-//根据题目显示答案
-function showAnswer(subject_id){
-    let sql = "select * from tbl_exam_choice where subject_id="+subject_id;
+//新增用户
+function addUser(userName,userCardId,userAge,userGender){
+    let sql='insert into user(name,card_id,age,gender) values("'+userName+'",'+userCardId+',"'+userAge+'","'+userGender+'")';
     return changeDB(sql);
 }
-//审核通过
-function checked(id){
-    let sql="update tbl_exam_subject set checkState ='审核通过' where id="+id;
+//查询新增用户的id
+function selectUserId(card_id) {
+    let sql='select * from user where card_id='+card_id;
     return changeDB(sql);
 }
-//审核不通过
-function unchecked(id){
-    let sql="update tbl_exam_subject set checkState ='审核不通过' where id="+id;
-    return changeDB(sql);
-}
-//删除题目
-function delSubject(id){
-    let sql="delete from tbl_exam_subject where id="+id;
-    changeDB(sql);
-    let sql1="delete from tbl_exam_choice where subject_id="+id;
-    return changeDB(sql1);
-}
-//保存题目
-function saveSubject(subjectTypeId,subjectLevelId,departmentId,topicId,stem,answer){
-    let sql = "insert tbl_exam_subject(subjectType_id,subjectLevel_id,department_id,topic_id,stem,answer) values("+subjectTypeId+","+subjectLevelId+","+departmentId+","+topicId+",'"+stem+"','"+answer+"')";
-    return changeDB(sql);
-
-}
-//保存答案
-function saveAnswer(choiceContent,choiceCorrect,subject_id){
-    for (var i = 0;i < choiceContent.length ; i++){
-        var sql1 = "insert tbl_exam_choice(content,correct,subject_id) values('"+choiceContent[i]+"',"+choiceCorrect[i]+","+subject_id+")";
-        if(i==3){
-            return changeDB(sql1);
-        }
-        else {
-            changeDB(sql1);
-        }
-
-    }
 
 
-}
+
+
+
 
 //操作数据库
 function changeDB(sql){
@@ -118,14 +79,9 @@ module.exports={
     getAllIllness,
     getCurrentDepartmentDoctorList,
     getCurrentIllnessDoctorList,
-    // getCurrentDoctorWorkList,
     getCurrentDoctorAmWorkList,
     getCurrentDoctorPmWorkList,
-    showAnswer,
-    checked,
-    unchecked,
-    delSubject,
-    saveSubject,
-    saveAnswer
+    addUser,
+    selectUserId
 
 }

@@ -67,33 +67,29 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
 
 });
 
-
-
-
-
-
-router.post('/saveSubject', function(req, res, next) {
-    var subjectTypeId=req.body.subjectTypeId;
-    var subjectLevelId=req.body.subjectLevelId;
-    var departmentId=req.body.departmentId;
-    var topicId=req.body.topicId;
-    var stem=req.body.stem;
-    var answer=req.body.answer;
-    examDB.saveSubject(subjectTypeId,subjectLevelId,departmentId,topicId,stem,answer).then((result)=>{
+router.post('/addUser', function(req, res, next) {
+    // console.log(req.body);
+    var name=req.body.name;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var card_id=req.body.card_id;
+    examDB.addUser(name,card_id,age,gender).then((result)=>{
         res.send(result);
     }).catch((err)=>{
         console.log("笨蛋，错！！！")
     });
 });
-router.post('/saveAnswer', function(req, res, next) {
-    var choiceContent = req.body.choiceContent;
-    var choiceCorrect =req.body.choiceCorrect;
-    var subject_id =req.body.subject_id;
-    examDB.saveAnswer(choiceContent,choiceCorrect,subject_id).then((result)=>{
+
+router.get('/selectUserId', function(req, res, next) {
+    let card_id=req.query.card_id;
+    examDB.selectUserId(card_id).then((result)=>{
         res.send(result);
     }).catch((err)=>{
-        console.log("笨蛋，错le！！！")
+        console.log("笨蛋，你又错啦！！！")
     });
 });
+
+
+
 
 module.exports = router;
