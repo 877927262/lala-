@@ -89,6 +89,21 @@ router.get('/selectUserId', function(req, res, next) {
     });
 });
 
+router.post('/registration', function(req, res, next) {
+    // console.log(req.body);
+    var appointmentDate=req.body.appointmentDate;
+    var appointmentTime=req.body.appointmentTime;
+    var appointmentDoctorId=req.body.appointmentDoctorId;
+    var appointmentUserId=req.body.appointmentUserId;
+    examDB.registration(appointmentDate,appointmentTime,appointmentDoctorId,appointmentUserId).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错！！！")
+    });
+});
+
+
+
 
 
 

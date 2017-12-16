@@ -42,6 +42,11 @@ function selectUserId(card_id) {
     let sql='select * from user where card_id='+card_id;
     return changeDB(sql);
 }
+//挂号
+function registration(appointmentDate,appointmentTime,appointmentDoctorId,appointmentUserId) {
+    let sql='insert into appointment(date,time,doctor,user) values("'+appointmentDate+'","'+appointmentTime+'",'+appointmentDoctorId+','+appointmentUserId+')';
+    return changeDB(sql);
+}
 
 
 
@@ -82,6 +87,7 @@ module.exports={
     getCurrentDoctorAmWorkList,
     getCurrentDoctorPmWorkList,
     addUser,
-    selectUserId
+    selectUserId,
+    registration
 
 }
