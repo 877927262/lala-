@@ -52,7 +52,7 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
 
                 theDoctor.push(work);
 
-                if(index==dateList.length-1){
+                if(theDoctor.length==dateList.length){
                     res.send(theDoctor);
                 }
 
