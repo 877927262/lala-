@@ -76,7 +76,7 @@ router.post('/addUser', function(req, res, next) {
     examDB.addUser(name,card_id,age,gender).then((result)=>{
         res.send(result);
     }).catch((err)=>{
-        console.log("笨蛋，错！！！")
+        console.log("笨蛋，错啦啦啦啦！！！")
     });
 });
 

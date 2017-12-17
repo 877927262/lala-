@@ -29,7 +29,7 @@ function getCurrentDoctorAmWorkList(doctorId,date){
 //获取当前日期 当前大夫下午的患者列表
 function getCurrentDoctorPmWorkList(doctorId,date){
 
-    let sql='select * from appointment where doctor='+doctorId+' and time="下午" and date='+date;
+    let sql='select * from appointment where doctor='+doctorId+' and time="下午" and date="'+date+'"';
     return changeDB(sql);
 }
 //新增用户
