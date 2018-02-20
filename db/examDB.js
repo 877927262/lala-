@@ -1,5 +1,9 @@
 let connection = require('./getConnection');
 
+/*
+  以下是前端系统操作数据库的方法
+*/
+
 //获取科室列表
 function getAllDepartment(){
     let sql = "select * from department";
@@ -48,7 +52,9 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
     return changeDB(sql);
 }
 
-
+/*
+  以下是管理系统操作数据库的方法
+*/
 
 
 
@@ -80,6 +86,9 @@ function changeDB(sql){
 //     console.log(result);
 // })
 module.exports={
+    /*
+      以下是前端操作数据库的方法
+    */
     getAllDepartment,
     getAllIllness,
     getCurrentDepartmentDoctorList,
@@ -89,5 +98,9 @@ module.exports={
     addUser,
     selectUserId,
     registration
+
+    /*
+      以下是管理系统操作数据库的方法
+    */
 
 }

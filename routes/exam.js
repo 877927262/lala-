@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 let examDB = require('../db/examDB');
 
+/*
+  以下是前端系统的api
+*/
+
 router.get('/getAllDepartment', function(req, res, next) {
     examDB.getAllDepartment().then((result)=>{
         res.send(result);
@@ -102,7 +106,9 @@ router.post('/registration', function(req, res, next) {
     });
 });
 
-
+/*
+  以下是管理系统的api
+*/
 
 
 
