@@ -110,6 +110,35 @@ router.post('/registration', function(req, res, next) {
   以下是管理系统的api
 */
 
+// 获取用户信息
+router.get('/getUser', function(req, res, next) {
+    examDB.getUser().then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
+// 获取大夫信息
+router.get('/getDoctor', function(req, res, next) {
+    examDB.getDoctor().then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
+// 获取疾病信息,这个 api 前端也有，不需要再加了
+
+// 获取预约信息
+router.get('/getAppointment', function(req, res, next) {
+    examDB.getAppointment().then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
 
 
 

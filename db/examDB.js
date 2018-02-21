@@ -55,6 +55,22 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
 /*
   以下是管理系统操作数据库的方法
 */
+// 获取用户信息
+function getUser(){
+    let sql = "select * from user";
+    return changeDB(sql)
+}
+// 获取患者信息
+function getDoctor(){
+    let sql = "select * from doctor";
+    return changeDB(sql)
+}
+// 获取 预约 信息
+function getAppointment(){
+    let sql = "select * from appointment";
+    return changeDB(sql)
+}
+
 
 
 
@@ -97,10 +113,13 @@ module.exports={
     getCurrentDoctorPmWorkList,
     addUser,
     selectUserId,
-    registration
+    registration,
 
     /*
       以下是管理系统操作数据库的方法
     */
 
+    getUser,
+    getDoctor,
+    getAppointment
 }
