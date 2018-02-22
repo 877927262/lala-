@@ -112,7 +112,9 @@ router.post('/registration', function(req, res, next) {
 
 // 获取用户信息
 router.get('/getUser', function(req, res, next) {
-    examDB.getUser().then((result)=>{
+    var name = req.query.name;
+    var page = req.query.page;
+    examDB.getUser(name, page).then((result)=>{
         res.send(result);
     }).catch((err)=>{
         console.log("笨蛋，错啦！！！")

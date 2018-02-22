@@ -56,8 +56,13 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
   以下是管理系统操作数据库的方法
 */
 // 获取用户信息
-function getUser(){
-    let sql = "select * from user";
+function getUser(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select * from user where name like '%"+name+"%' limit "+start+",10;";
+    } else {
+      var sql = "select * from user limit "+start+",10;";
+    }
     return changeDB(sql)
 }
 // 获取患者信息
