@@ -114,8 +114,12 @@ router.post('/registration', function(req, res, next) {
 router.get('/getUser', function(req, res, next) {
     var name = req.query.name;
     var page = req.query.page;
+    var data = {};
     examDB.getUser(name, page).then((result)=>{
-        res.send(result);
+        var total = result.length;
+        data.total = total;
+        data.data = result;
+        res.send(data);
     }).catch((err)=>{
         console.log("笨蛋，错啦！！！")
     });
