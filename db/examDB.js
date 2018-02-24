@@ -77,8 +77,9 @@ function getUserMount(name,page){
 }
 // 编辑用户
 function editUser(params){
-    var sql = `insert into user(name, gender, age, card_id) values(${params.name}, ${params.gender}, ${params.age}, ${params.card_id});`;
-    // return changeDB(sql)
+  console.log(params);
+    var sql = `update user set name='${params.name}',gender='${params.gender}',age='${params.age}',card_id='${params.card_id}' where id=${params.id};`;
+    return changeDB(sql)
 }
 
 
@@ -144,6 +145,7 @@ module.exports={
 
     getUser,
     addUser,
+    editUser,
     getDoctor,
     getAppointment,
     getUserMount
