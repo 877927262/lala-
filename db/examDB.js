@@ -55,31 +55,35 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
 /*
   以下是管理系统操作数据库的方法
 */
-// 获取用户信息
+// 获取用户信息列表
 function getUser(name,page){
     var start = (page-1)*10;
     if (name) {
       var sql = "select * from user where name like '%"+name+"%' limit "+start+",10;";
-      // var sql = "select * from user where name like '%"+name+"%' ;";
     } else {
       var sql = "select * from user limit "+start+",10;";
-      // var sql = "select * from user ;";
     }
     return changeDB(sql)
 }
-// 获取数据的数量
+// 获取患者的数量
 function getUserMount(name,page){
     var start = (page-1)*10;
     if (name) {
       var sql = "select count(*) as total from user where name like '%"+name+"%';";
-      // var sql = "select * from user where name like '%"+name+"%' ;";
     } else {
       var sql = "select count(*) as total from user;";
-      // var sql = "select * from user ;";
     }
     return changeDB(sql)
 }
-// 获取患者信息
+// 编辑用户
+function editUser(params){
+    var sql = `insert into user(name, gender, age, card_id) values(${params.name}, ${params.gender}, ${params.age}, ${params.card_id});`;
+    // return changeDB(sql)
+}
+
+
+
+// 获取大夫信息
 function getDoctor(){
     let sql = "select * from doctor";
     return changeDB(sql)
@@ -139,6 +143,7 @@ module.exports={
     */
 
     getUser,
+    addUser,
     getDoctor,
     getAppointment,
     getUserMount

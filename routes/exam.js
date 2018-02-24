@@ -72,7 +72,6 @@ router.get('/getCurrentDoctorWorkList', function(req, res, next) {
 });
 
 router.post('/addUser', function(req, res, next) {
-    // console.log(req.body);
     var name=req.body.name;
     var age=req.body.age;
     var gender=req.body.gender;
@@ -127,8 +126,20 @@ router.get('/getUser', function(req, res, next) {
     }).catch((err)=>{
         console.log("笨蛋，错啦！！！")
     });
+});
 
+// 编辑用户
+router.post('/editUser', function(req, res, next) {
+  console.log(req);
+  // res.send('hehe');
 
+    // var name = req.query.name;
+    //
+    // examDB.addUser(name, page).then((result)=>{
+    //
+    // }).catch((err)=>{
+    //     console.log("笨蛋，错啦！！！")
+    // });
 });
 
 // 获取大夫信息
