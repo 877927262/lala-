@@ -60,8 +60,22 @@ function getUser(name,page){
     var start = (page-1)*10;
     if (name) {
       var sql = "select * from user where name like '%"+name+"%' limit "+start+",10;";
+      // var sql = "select * from user where name like '%"+name+"%' ;";
     } else {
       var sql = "select * from user limit "+start+",10;";
+      // var sql = "select * from user ;";
+    }
+    return changeDB(sql)
+}
+// 获取数据的数量
+function getUserMount(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select count(*) as total from user where name like '%"+name+"%';";
+      // var sql = "select * from user where name like '%"+name+"%' ;";
+    } else {
+      var sql = "select count(*) as total from user;";
+      // var sql = "select * from user ;";
     }
     return changeDB(sql)
 }
@@ -126,5 +140,6 @@ module.exports={
 
     getUser,
     getDoctor,
-    getAppointment
+    getAppointment,
+    getUserMount
 }

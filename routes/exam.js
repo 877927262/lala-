@@ -115,14 +115,20 @@ router.get('/getUser', function(req, res, next) {
     var name = req.query.name;
     var page = req.query.page;
     var data = {};
-    examDB.getUser(name, page).then((result)=>{
-        var total = result.length;
-        data.total = total;
-        data.data = result;
-        res.send(data);
+
+    examDB.getUserMount(name, page).then((result)=>{
+      data.total = result[0].total
+        examDB.getUser(name, page).then((result)=>{
+            data.data = result;
+            res.send(data);
+        }).catch((err)=>{
+            console.log("笨蛋，错啦！！！")
+        });
     }).catch((err)=>{
         console.log("笨蛋，错啦！！！")
     });
+
+
 });
 
 // 获取大夫信息
