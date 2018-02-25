@@ -138,6 +138,16 @@ router.post('/editUser', function(req, res, next) {
     });
 });
 
+// 删除用户
+router.get('/deleteUser', function(req, res, next) {
+    var userId = req.query.id;
+    examDB.deleteUser(userId).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
 // 获取大夫信息
 router.get('/getDoctor', function(req, res, next) {
     examDB.getDoctor().then((result)=>{

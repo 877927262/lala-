@@ -77,8 +77,12 @@ function getUserMount(name,page){
 }
 // 编辑用户
 function editUser(params){
-  console.log(params);
     var sql = `update user set name='${params.name}',gender='${params.gender}',age='${params.age}',card_id='${params.card_id}' where id=${params.id};`;
+    return changeDB(sql)
+}
+// 删除用户
+function deleteUser(userId){
+    var sql = `delete from user where id=${userId};`;
     return changeDB(sql)
 }
 
@@ -146,6 +150,7 @@ module.exports={
     getUser,
     addUser,
     editUser,
+    deleteUser,
     getDoctor,
     getAppointment,
     getUserMount
