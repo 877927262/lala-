@@ -89,10 +89,28 @@ function deleteUser(userId){
 
 
 // 获取大夫信息
-function getDoctor(){
-    let sql = "select * from doctor";
+function getDoctor(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select * from doctor where name like '%"+name+"%' limit "+start+",10;";
+    } else {
+      var sql = "select * from doctor limit "+start+",10;";
+    }
     return changeDB(sql)
 }
+
+// 获取患者的数量
+function getDoctorMount(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select count(*) as total from doctor where name like '%"+name+"%';";
+    } else {
+      var sql = "select count(*) as total from doctor;";
+    }
+    return changeDB(sql)
+}
+
+
 // 获取 预约 信息
 function getAppointment(){
     let sql = "select * from appointment";
@@ -153,5 +171,6 @@ module.exports={
     deleteUser,
     getDoctor,
     getAppointment,
-    getUserMount
+    getUserMount,
+    getDoctorMount
 }

@@ -150,11 +150,22 @@ router.get('/deleteUser', function(req, res, next) {
 
 // 获取大夫信息
 router.get('/getDoctor', function(req, res, next) {
-    examDB.getDoctor().then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
-    });
+  var name = req.query.name;
+  var page = req.query.page;
+  var data = {};
+  // console.log(name,page)
+
+  examDB.getDoctorMount(name, page).then((result)=>{
+    data.total = result[0].total
+      examDB.getDoctor(name, page).then((result)=>{
+          data.data = result;
+          res.send(data);
+      }).catch((err)=>{
+          console.log("笨蛋，错啦！！！")
+      });
+  }).catch((err)=>{
+      console.log("笨蛋，错啦！！！")
+  });
 });
 
 // 获取疾病信息,这个 api 前端也有，不需要再加了
