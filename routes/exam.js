@@ -190,6 +190,15 @@ router.post('/addDoctor', function(req, res, next) {
         console.log("笨蛋，错啦啦啦啦！！！")
     });
 });
+// 编辑用户
+router.post('/editDoctor', function(req, res, next) {
+    var params = req.body;
+    examDB.editDoctor(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
 
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 

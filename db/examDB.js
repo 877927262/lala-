@@ -108,6 +108,11 @@ function addDcotor(doctorName,doctorDepartment,doctorAge,doctorGender){
     let sql='insert into doctor(name,department,age,gender) values("'+doctorName+'",'+doctorDepartment+',"'+doctorAge+'","'+doctorGender+'")';
     return changeDB(sql);
 }
+// 编辑大夫
+function editDoctor(params){
+    var sql = `update doctor set name='${params.name}',gender='${params.gender}',age='${params.age}',department='${params.initDepartmentValue}' where id=${params.id};`;
+    return changeDB(sql)
+}
 
 
 
@@ -187,5 +192,6 @@ module.exports={
     getUserMount,
     getDoctorMount,
     deleteDoctor,
-    addDcotor
+    addDcotor,
+    editDoctor
 }
