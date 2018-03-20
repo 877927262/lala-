@@ -92,9 +92,9 @@ function deleteUser(userId){
 function getDoctor(name,page){
     var start = (page-1)*10;
     if (name) {
-      var sql = "select * from doctor where name like '%"+name+"%' limit "+start+",10;";
+      var sql = "select a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id where a.name like '%"+name+"%' limit "+start+",10;";
     } else {
-      var sql = "select * from doctor limit "+start+",10;";
+      var sql = "select a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id limit "+start+",10;";
     }
     return changeDB(sql)
 }

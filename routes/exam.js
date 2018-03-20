@@ -161,7 +161,7 @@ router.get('/getDoctor', function(req, res, next) {
           data.data = result;
           res.send(data);
       }).catch((err)=>{
-          console.log("笨蛋，错啦！！！")
+          console.log("笨蛋，错啦啊！")
       });
   }).catch((err)=>{
       console.log("笨蛋，错啦！！！")
@@ -175,7 +175,7 @@ router.get('/getAppointment', function(req, res, next) {
     examDB.getAppointment().then((result)=>{
         res.send(result);
     }).catch((err)=>{
-        console.log("笨蛋，错啦！！！")
+        console.log("笨蛋，错啦")
     });
 });
 
