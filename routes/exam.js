@@ -168,6 +168,17 @@ router.get('/getDoctor', function(req, res, next) {
   });
 });
 
+
+// 删除大夫
+router.get('/deleteDoctor', function(req, res, next) {
+    var DoctorId = req.query.id;
+    examDB.deleteDoctor(DoctorId).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 
 // 获取预约信息

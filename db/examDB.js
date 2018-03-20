@@ -92,12 +92,20 @@ function deleteUser(userId){
 function getDoctor(name,page){
     var start = (page-1)*10;
     if (name) {
-      var sql = "select a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id where a.name like '%"+name+"%' limit "+start+",10;";
+      var sql = "select a.id,a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id where a.name like '%"+name+"%' limit "+start+",10;";
     } else {
-      var sql = "select a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id limit "+start+",10;";
+      var sql = "select a.id,a.name,a.age,a.gender,b.name as department from doctor as a inner join department as b on a.department=b.id limit "+start+",10;";
     }
     return changeDB(sql)
 }
+// 删除大夫
+function deleteDoctor(doctorId){
+    var sql = `delete from doctor where id=${doctorId};`;
+    return changeDB(sql)
+}
+
+
+
 
 // 获取患者的数量
 function getDoctorMount(name,page){
@@ -172,5 +180,6 @@ module.exports={
     getDoctor,
     getAppointment,
     getUserMount,
-    getDoctorMount
+    getDoctorMount,
+    deleteDoctor
 }
