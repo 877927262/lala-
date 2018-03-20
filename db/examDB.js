@@ -103,6 +103,11 @@ function deleteDoctor(doctorId){
     var sql = `delete from doctor where id=${doctorId};`;
     return changeDB(sql)
 }
+//新增大夫
+function addDcotor(doctorName,doctorDepartment,doctorAge,doctorGender){
+    let sql='insert into doctor(name,department,age,gender) values("'+doctorName+'",'+doctorDepartment+',"'+doctorAge+'","'+doctorGender+'")';
+    return changeDB(sql);
+}
 
 
 
@@ -181,5 +186,6 @@ module.exports={
     getAppointment,
     getUserMount,
     getDoctorMount,
-    deleteDoctor
+    deleteDoctor,
+    addDcotor
 }

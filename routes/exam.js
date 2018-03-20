@@ -178,6 +178,18 @@ router.get('/deleteDoctor', function(req, res, next) {
         console.log("笨蛋，错啦！！！")
     });
 });
+// 增加大夫
+router.post('/addDoctor', function(req, res, next) {
+    var name=req.body.name;
+    var age=req.body.age;
+    var gender=req.body.gender;
+    var department=req.body.department;
+    examDB.addDcotor(name,department,age,gender).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦啦啦啦！！！")
+    });
+});
 
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 
