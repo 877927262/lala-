@@ -200,6 +200,20 @@ router.post('/editDoctor', function(req, res, next) {
     });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 
 // 获取预约信息

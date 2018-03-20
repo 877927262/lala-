@@ -113,11 +113,7 @@ function editDoctor(params){
     var sql = `update doctor set name='${params.name}',gender='${params.gender}',age='${params.age}',department='${params.initDepartmentValue}' where id=${params.id};`;
     return changeDB(sql)
 }
-
-
-
-
-// 获取患者的数量
+// 获取大夫的数量
 function getDoctorMount(name,page){
     var start = (page-1)*10;
     if (name) {
@@ -127,6 +123,19 @@ function getDoctorMount(name,page){
     }
     return changeDB(sql)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 获取 预约 信息
