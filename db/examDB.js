@@ -124,7 +124,26 @@ function getDoctorMount(name,page){
     return changeDB(sql)
 }
 
-
+// 获取科室信息列表
+function getDepartment(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select * from department where name like '%"+name+"%' limit "+start+",10;";
+    } else {
+      var sql = "select * from department limit "+start+",10;";
+    }
+    return changeDB(sql)
+}
+// 获取科室的数量
+function getDepartmentMount(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select count(*) as total from department where name like '%"+name+"%';";
+    } else {
+      var sql = "select count(*) as total from department;";
+    }
+    return changeDB(sql)
+}
 
 
 
@@ -202,5 +221,7 @@ module.exports={
     getDoctorMount,
     deleteDoctor,
     addDcotor,
-    editDoctor
+    editDoctor,
+    getDepartment,
+    getDepartmentMount
 }

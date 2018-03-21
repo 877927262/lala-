@@ -200,7 +200,23 @@ router.post('/editDoctor', function(req, res, next) {
     });
 });
 
-
+// 获取科室信息
+router.get('/getDepartment', function(req, res, next) {
+    var name = req.query.name;
+    var page = req.query.page;
+    var data = {};
+    examDB.getDepartmentMount(name, page).then((result)=>{
+      data.total = result[0].total
+      examDB.getDepartment(name, page).then((result)=>{
+          data.data = result;
+          res.send(data);
+      }).catch((err)=>{
+          console.log("笨蛋，错啦")
+      });
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！")
+    });
+});
 
 
 
