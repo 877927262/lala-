@@ -165,6 +165,46 @@ function editDepartment(params){
 
 
 
+// 获取病症信息列表
+function getIllness(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select * from illness where name like '%"+name+"%' limit "+start+",10;";
+    } else {
+      var sql = "select * from illness limit "+start+",10;";
+    }
+    return changeDB(sql)
+}
+// 获取病症的数量
+function getIllnessMount(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select count(*) as total from illness where name like '%"+name+"%';";
+    } else {
+      var sql = "select count(*) as total from illness;";
+    }
+    return changeDB(sql)
+}
+
+// 删除病症
+function deleteIllness(departmentId){
+    var sql = `delete from illness where id=${departmentId};`;
+    return changeDB(sql)
+}
+//新增病症
+function addIllness(departmentName,departmentBanner){
+    let sql='insert into illness(name,banner) values("'+departmentName+'","'+departmentBanner+'")';
+    return changeDB(sql);
+}
+// 编辑病症
+function editIllness(params){
+    var sql = `update illness set name='${params.name}',banner='${params.banner}' where id=${params.id};`;
+    return changeDB(sql)
+}
+
+
+
+
 
 
 
@@ -240,5 +280,10 @@ module.exports={
     getDepartmentMount,
     deleteDepartment,
     addDepartment,
-    editDepartment
+    editDepartment,
+    getIllness,
+    getIllnessMount,
+    deleteIllness,
+    addIllness,
+    editIllness,
 }

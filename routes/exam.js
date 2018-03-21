@@ -253,6 +253,58 @@ router.post('/editDepartment', function(req, res, next) {
 
 
 
+// 获取病症信息
+router.get('/getIllness', function(req, res, next) {
+    var name = req.query.name;
+    var page = req.query.page;
+    var data = {};
+    examDB.getIllnessMount(name, page).then((result)=>{
+      data.total = result[0].total
+      examDB.getIllness(name, page).then((result)=>{
+          data.data = result;
+          res.send(data);
+      }).catch((err)=>{
+          console.log("笨蛋，错啦")
+      });
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！")
+    });
+});
+
+// 删除病症
+router.get('/deleteIllness', function(req, res, next) {
+    var illnessId = req.query.id;
+    examDB.deleteIllness(illnessId).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+// 增加病症
+router.post('/addIllness', function(req, res, next) {
+    var name=req.body.name;
+    var banner=req.body.banner;
+    examDB.addIllness(name,banner).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦啦啦啦！！！")
+    });
+});
+
+// 编辑病症
+router.post('/editIllness', function(req, res, next) {
+    var params = req.body;
+    examDB.editIllness(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
+
+
+
+
 
 
 // 获取疾病信息,这个 api 前端也有，不需要再加了
