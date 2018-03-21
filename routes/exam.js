@@ -307,16 +307,57 @@ router.post('/editIllness', function(req, res, next) {
 
 
 
+// 获取预约信息
+router.get('/getAppointment', function(req, res, next) {
+    var name = req.query.name;
+    var page = req.query.page;
+    var data = {};
+
+    examDB.getAppointmentMount(name, page).then((result)=>{
+      data.total = result[0].total
+        examDB.getAppointment(name, page).then((result)=>{
+            data.data = result;
+            res.send(data);
+        }).catch((err)=>{
+            console.log("笨蛋，错啦！")
+        });
+    }).catch((err)=>{
+        console.log("笨蛋，错啦哟！！！")
+    });
+});
+
+// 编辑预约
+// router.post('/editUser', function(req, res, next) {
+//     var params = req.body;
+//     examDB.editUser(params).then((result)=>{
+//       res.send(result);
+//     }).catch((err)=>{
+//         console.log("笨蛋，错啦！！！")
+//     });
+// });
+
+// 删除预约
+router.get('/deleteAppointment', function(req, res, next) {
+    var appointmentId = req.query.id;
+    examDB.deleteAppointment(appointmentId).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
+
+
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 
 // 获取预约信息
-router.get('/getAppointment', function(req, res, next) {
-    examDB.getAppointment().then((result)=>{
-        res.send(result);
-    }).catch((err)=>{
-        console.log("笨蛋，错啦")
-    });
-});
+// router.get('/getAppointment', function(req, res, next) {
+//     examDB.getAppointment().then((result)=>{
+//         res.send(result);
+//     }).catch((err)=>{
+//         console.log("笨蛋，错啦")
+//     });
+// });
 
 
 

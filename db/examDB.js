@@ -32,7 +32,6 @@ function getCurrentDoctorAmWorkList(doctorId,date){
 }
 //获取当前日期 当前大夫下午的患者列表
 function getCurrentDoctorPmWorkList(doctorId,date){
-
     let sql='select * from appointment where doctor='+doctorId+' and time="下午" and date="'+date+'"';
     return changeDB(sql);
 }
@@ -205,17 +204,51 @@ function editIllness(params){
 
 
 
-
-
+// 获取预约信息列表
+function getAppointment(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.name like '%"+name+"%' limit "+start+",10;";
+      console.log(sql);
+    } else {
+      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id limit "+start+",10;";
+    }
+    return changeDB(sql)
+}
+// 获取预约的数量
+function getAppointmentMount(name,page){
+    var start = (page-1)*10;
+    if (name) {
+      var sql = "select count(*) as total from appointment where name like '%"+name+"%';";
+    } else {
+      var sql = "select count(*) as total from appointment;";
+    }
+    return changeDB(sql)
+}
+// 编辑预约记录
+// function editAppointment(params){
+//     var sql = `update user set name='${params.name}',gender='${params.gender}',age='${params.age}',card_id='${params.card_id}' where id=${params.id};`;
+//     return changeDB(sql)
+// }
+// 删除预约记录
+function deleteAppointment(userId){
+    var sql = `delete from appointment where id=${userId};`;
+    return changeDB(sql)
+}
+//新增预约记录
+// function addAppointment(doctorName,doctorDepartment,doctorAge,doctorGender){
+//     let sql='insert into doctor(name,department,age,gender) values("'+doctorName+'",'+doctorDepartment+',"'+doctorAge+'","'+doctorGender+'")';
+//     return changeDB(sql);
+// }
 
 
 
 
 // 获取 预约 信息
-function getAppointment(){
-    let sql = "select * from appointment";
-    return changeDB(sql)
-}
+// function getAppointment(){
+//     let sql = "select * from appointment";
+//     return changeDB(sql)
+// }
 
 
 
@@ -286,4 +319,7 @@ module.exports={
     deleteIllness,
     addIllness,
     editIllness,
+    getAppointment,
+    getAppointmentMount,
+    deleteAppointment
 }
