@@ -227,9 +227,26 @@ router.get('/deleteDepartment', function(req, res, next) {
         console.log("笨蛋，错啦！！！")
     });
 });
+// 增加科室
+router.post('/addDepartment', function(req, res, next) {
+    var name=req.body.name;
+    var banner=req.body.banner;
+    examDB.addDepartment(name,banner).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦啦啦啦！！！")
+    });
+});
 
-
-
+// 编辑科室
+router.post('/editDepartment', function(req, res, next) {
+    var params = req.body;
+    examDB.editDepartment(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
 
 
 

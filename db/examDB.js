@@ -150,6 +150,16 @@ function deleteDepartment(departmentId){
     var sql = `delete from department where id=${departmentId};`;
     return changeDB(sql)
 }
+//新增科室
+function addDepartment(departmentName,departmentBanner){
+    let sql='insert into department(name,banner) values("'+departmentName+'","'+departmentBanner+'")';
+    return changeDB(sql);
+}
+// 编辑科室
+function editDepartment(params){
+    var sql = `update department set name='${params.name}',banner='${params.banner}' where id=${params.id};`;
+    return changeDB(sql)
+}
 
 
 
@@ -228,5 +238,7 @@ module.exports={
     editDoctor,
     getDepartment,
     getDepartmentMount,
-    deleteDepartment
+    deleteDepartment,
+    addDepartment,
+    editDepartment
 }
