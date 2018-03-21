@@ -206,9 +206,10 @@ function editIllness(params){
 
 // 获取预约信息列表
 function getAppointment(name,page){
+  console.log(name,page);
     var start = (page-1)*10;
     if (name) {
-      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.name like '%"+name+"%' limit "+start+",10;";
+      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where c.name like '%"+name+"%' limit "+start+",10;";
       console.log(sql);
     } else {
       var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id limit "+start+",10;";
@@ -219,7 +220,7 @@ function getAppointment(name,page){
 function getAppointmentMount(name,page){
     var start = (page-1)*10;
     if (name) {
-      var sql = "select count(*) as total from appointment where name like '%"+name+"%';";
+      var sql = "select count(*) as total from (select a.user,b.name from appointment as a inner join user as b on a.user=b.id where b.name like '%"+name+"%') hehe;";
     } else {
       var sql = "select count(*) as total from appointment;";
     }
