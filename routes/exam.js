@@ -218,7 +218,15 @@ router.get('/getDepartment', function(req, res, next) {
     });
 });
 
-
+// 删除科室
+router.get('/deleteDepartment', function(req, res, next) {
+    var departmentId = req.query.id;
+    examDB.deleteDepartment(departmentId).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
 
 
 

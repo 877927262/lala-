@@ -145,7 +145,11 @@ function getDepartmentMount(name,page){
     return changeDB(sql)
 }
 
-
+// 删除科室
+function deleteDepartment(departmentId){
+    var sql = `delete from department where id=${departmentId};`;
+    return changeDB(sql)
+}
 
 
 
@@ -223,5 +227,6 @@ module.exports={
     addDcotor,
     editDoctor,
     getDepartment,
-    getDepartmentMount
+    getDepartmentMount,
+    deleteDepartment
 }
