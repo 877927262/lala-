@@ -109,6 +109,18 @@ router.post('/registration', function(req, res, next) {
   以下是管理系统的api
 */
 
+// 登录
+router.post('/login', function(req, res, next) {
+    var params = req.body;
+    examDB.login(params).then((result)=>{
+      console.log(result[0])
+      res.send(result[0]);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
+
 // 获取用户信息
 router.get('/getUser', function(req, res, next) {
     var name = req.query.name;

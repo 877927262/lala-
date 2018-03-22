@@ -54,6 +54,15 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
 /*
   以下是管理系统操作数据库的方法
 */
+// 登录
+function login(params){
+    var sql = `select * from admin where name='${params.username}' and password='${params.password}';`;
+    return changeDB(sql)
+}
+
+
+
+
 // 获取用户信息列表
 function getUser(name,page){
     var start = (page-1)*10;
@@ -298,7 +307,7 @@ module.exports={
     /*
       以下是管理系统操作数据库的方法
     */
-
+    login,
     getUser,
     addUser,
     editUser,
