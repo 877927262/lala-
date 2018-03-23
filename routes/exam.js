@@ -362,14 +362,26 @@ router.get('/deleteAppointment', function(req, res, next) {
 
 // 获取疾病信息,这个 api 前端也有，不需要再加了
 
-// 获取预约信息
-// router.get('/getAppointment', function(req, res, next) {
-//     examDB.getAppointment().then((result)=>{
-//         res.send(result);
-//     }).catch((err)=>{
-//         console.log("笨蛋，错啦")
-//     });
-// });
+
+// 修改管理员信息
+router.post('/editAdminInfo', function(req, res, next) {
+    var params = req.body;
+    examDB.editAdminInfo(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+// 修改管理员密码
+router.post('/editAdminPassword', function(req, res, next) {
+    var params = req.body;
+    examDB.editAdminPassword(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
+
 
 
 

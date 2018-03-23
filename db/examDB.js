@@ -235,33 +235,26 @@ function getAppointmentMount(name,page){
     }
     return changeDB(sql)
 }
-// 编辑预约记录
-// function editAppointment(params){
-//     var sql = `update user set name='${params.name}',gender='${params.gender}',age='${params.age}',card_id='${params.card_id}' where id=${params.id};`;
-//     return changeDB(sql)
-// }
+
 // 删除预约记录
 function deleteAppointment(userId){
     var sql = `delete from appointment where id=${userId};`;
     return changeDB(sql)
 }
-//新增预约记录
-// function addAppointment(doctorName,doctorDepartment,doctorAge,doctorGender){
-//     let sql='insert into doctor(name,department,age,gender) values("'+doctorName+'",'+doctorDepartment+',"'+doctorAge+'","'+doctorGender+'")';
-//     return changeDB(sql);
-// }
 
 
 
 
-// 获取 预约 信息
-// function getAppointment(){
-//     let sql = "select * from appointment";
-//     return changeDB(sql)
-// }
-
-
-
+// 修改管理员信息
+function editAdminInfo(params){
+    var sql = `update admin set name='${params.name}',avatar='${params.logo}' where id=${params.id};`;
+    return changeDB(sql)
+}
+// 修改管理员密码
+function editAdminPassword(params){
+    var sql = `update admin set password='${params.newPassword}' where id='${params.id}' and password='${params.olderPassword}';`;
+    return changeDB(sql)
+}
 
 
 //操作数据库
@@ -331,5 +324,7 @@ module.exports={
     editIllness,
     getAppointment,
     getAppointmentMount,
-    deleteAppointment
+    deleteAppointment,
+    editAdminInfo,
+    editAdminPassword
 }
