@@ -218,10 +218,9 @@ function getAppointment(name,page){
   console.log(name,page);
     var start = (page-1)*10;
     if (name) {
-      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where c.name like '%"+name+"%' limit "+start+",10;";
-      console.log(sql);
+      var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where c.name like '%"+name+"%' limit "+start+",10;";
     } else {
-      var sql = "select a.id,a.date,a.time,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id limit "+start+",10;";
+      var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id limit "+start+",10;";
     }
     return changeDB(sql)
 }
@@ -255,7 +254,11 @@ function editAdminPassword(params){
     var sql = `update admin set password='${params.newPassword}' where id='${params.id}' and password='${params.olderPassword}';`;
     return changeDB(sql)
 }
-
+// 修改诊断结果
+function editIllnessResult(params){
+    var sql = `update appointment set result='${params.result}' where id='${params.id}';`;
+    return changeDB(sql)
+}
 
 //操作数据库
 function changeDB(sql){
@@ -326,5 +329,6 @@ module.exports={
     getAppointmentMount,
     deleteAppointment,
     editAdminInfo,
-    editAdminPassword
+    editAdminPassword,
+    editIllnessResult
 }

@@ -381,7 +381,15 @@ router.post('/editAdminPassword', function(req, res, next) {
         console.log("笨蛋，错啦！！！")
     });
 });
-
+// 修改诊断结果
+router.post('/editIllnessResult', function(req, res, next) {
+    var params = req.body;
+    examDB.editIllnessResult(params).then((result)=>{
+      res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，错啦！！！")
+    });
+});
 
 
 
