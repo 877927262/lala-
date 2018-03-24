@@ -3,6 +3,11 @@ let connection = require('./getConnection');
 /*
   以下是前端系统操作数据库的方法
 */
+// 获取用户预约信息
+function getUserAppointment(userId){
+    var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.id="+userId;
+    return changeDB(sql)
+}
 
 //获取科室列表
 function getAllDepartment(){
@@ -299,6 +304,7 @@ module.exports={
     addUser,
     selectUserId,
     registration,
+    getUserAppointment,
 
     /*
       以下是管理系统操作数据库的方法
@@ -325,7 +331,7 @@ module.exports={
     deleteIllness,
     addIllness,
     editIllness,
-    getAppointment,
+    // getAppointment,
     getAppointmentMount,
     deleteAppointment,
     editAdminInfo,

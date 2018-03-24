@@ -105,6 +105,15 @@ router.post('/registration', function(req, res, next) {
     });
 });
 
+// 获取用户挂号信息
+router.get('/getUserAppointment', function(req, res, next) {
+    let userId=req.query.userId;
+    examDB.getUserAppointment(userId).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，你又错啦！！！")
+    });
+});
 /*
   以下是管理系统的api
 */
