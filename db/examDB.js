@@ -5,7 +5,7 @@ let connection = require('./getConnection');
 */
 // 获取用户预约信息
 function getUserAppointment(userId){
-    var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.id="+userId;
+    var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.user="+userId;
     return changeDB(sql)
 }
 
