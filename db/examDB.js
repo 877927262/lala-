@@ -3,7 +3,7 @@ let connection = require('./getConnection');
 /*
   以下是前端系统操作数据库的方法
 */
-// 获取用户预约信息
+// 获取用户挂号信息，显示在表格下
 function getUserAppointment(userId){
     var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.user="+userId;
     return changeDB(sql)
@@ -55,6 +55,13 @@ function registration(appointmentDate,appointmentTime,appointmentDoctorId,appoin
     let sql='insert into appointment(date,time,doctor,user) values("'+appointmentDate+'","'+appointmentTime+'",'+appointmentDoctorId+','+appointmentUserId+')';
     return changeDB(sql);
 }
+
+// 按照用户的身份证号查询诊断信息
+function getUserAppointmentForUserId(userId){
+    var sql = "select a.id,a.date,a.time,a.result,b.name as doctor,c.name as user from appointment as a inner join doctor as b on a.doctor=b.id inner join user as c on a.user=c.id where a.user=(select id from user where card_id="+userId+")";
+    return changeDB(sql)
+}
+
 
 /*
   以下是管理系统操作数据库的方法
@@ -336,5 +343,6 @@ module.exports={
     deleteAppointment,
     editAdminInfo,
     editAdminPassword,
-    editIllnessResult
+    editIllnessResult,
+    getUserAppointmentForUserId
 }

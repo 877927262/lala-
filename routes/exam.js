@@ -105,10 +105,19 @@ router.post('/registration', function(req, res, next) {
     });
 });
 
-// 获取用户挂号信息
+// 获取用户挂号信息，显示在表格下
 router.get('/getUserAppointment', function(req, res, next) {
     let userId=req.query.userId;
     examDB.getUserAppointment(userId).then((result)=>{
+        res.send(result);
+    }).catch((err)=>{
+        console.log("笨蛋，你又错啦！！！")
+    });
+});
+// 按照用户的身份证号查询诊断信息
+router.get('/getUserAppointmentForUserId', function(req, res, next) {
+    let userId=req.query.userId;
+    examDB.getUserAppointmentForUserId(userId).then((result)=>{
         res.send(result);
     }).catch((err)=>{
         console.log("笨蛋，你又错啦！！！")
